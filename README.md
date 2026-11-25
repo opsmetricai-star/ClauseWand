@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ClauseWand
 
-## Getting Started
+AI contract review, drafting and Q&A for in-house teams and law firms. Next.js 16 · React 19 · TypeScript · Tailwind 4 · Supabase · Gemini.
 
-First, run the development server:
+## Setup
+1. `npm install`
+2. Create a Supabase project, run `supabase/schema.sql` in the SQL editor (tables, RLS, storage bucket).
+3. Copy `.env.example` to `.env.local` and fill every value.
+4. Supabase > Auth > URL Configuration: add `http://localhost:3000/auth/callback` and your production `/auth/callback`.
+5. `npm run dev`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Payments (Selar)
+Pricing links live in `src/lib/brand.ts`. A redirect from checkout never activates a plan. Activation happens only via:
+- `POST /api/billing/webhook?token=BILLING_WEBHOOK_SECRET` (configure in Selar; **verify field names against a real test sale** in `route.ts`), or
+- the manual admin page `/app/admin` for emails in `ADMIN_EMAILS`.
+Amounts of 47/57/97 map to Solo/Team/Firm. Customers must pay with the same email as their account.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploy (Vercel)
+Import the repo, set the env vars from `.env.example`, deploy. Set `BILLING_WEBHOOK_SECRET` before giving Selar the webhook URL.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Known limitations
+- Customer names, quotes and statistics on marketing pages are fictional placeholders.
+- Integrations (Word, Slack, email, etc.) are listed as planned; not built.
+- Legal pages are templates and need counsel review.
+- Market comparison uses the model's general knowledge, not a licensed dataset.
