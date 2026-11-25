@@ -14,26 +14,28 @@ export default function AuthForm({ mode, configured }: { mode: Mode; configured:
   const router = useRouter();
   const sp = useSearchParams();
   const [busy, setBusy] = useState(false);
-  const [err, setErr] = useState(sp.get("error") === "not_configured" ? "Authentication is not configured yet. Add the Supabase environment variables." : "");
+  const [err, setErr] = useState(sp.get("error") === "auth" ? "That link is invalid or has expired. Please try again." : "");
   const [ok, setOk] = useState("");
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault(); setErr(""); setOk("");
-    if (!configured) return setErr("Authentication is not configured yet. Add the Supabase environment variables.");
+    if (!configured) return setErr("Sign-in is temporarily unavailable. Please try again shortly.");
     const fd = new FormData(e.currentTarget);
     const email = String(fd.get("email") ?? ""); const password = String(fd.get("password") ?? "");
     const sb = createClient(); setBusy(true);
-    const origin = window.location.origin;
+    const origin = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+    const plan = sp.get("plan");
+    const after = plan ? `/app/billing?plan=${encodeURIComponent(plan)}` : "/app";
     try {
       if (mode === "login") {
         const { error } = await sb.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        router.push(sp.get("next") || "/app"); router.refresh();
+        router.push(sp.get("next") || (plan ? after : "/app")); router.refresh();
       } else if (mode === "signup") {
         if (password.length < 8) throw new Error("Password must be at least 8 characters.");
-        const { data, error } = await sb.auth.signUp({ email, password, options: { data: { full_name: fd.get("name") }, emailRedirectTo: `${origin}/auth/callback?next=/app` } });
+        const { data, error } = await sb.auth.signUp({ email, password, options: { data: { full_name: fd.get("name") }, emailRedirectTo: `${origin}/auth/callback?next=${encodeURIComponent(after)}` } });
         if (error) throw error;
-        if (data.session) { router.push("/app"); router.refresh(); } else setOk("Check your email to confirm your account, then log in.");
+        if (data.session) { router.push(after); router.refresh(); } else setOk("Check your email to confirm your account, then log in.");
       } else if (mode === "forgot") {
         const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: `${origin}/auth/callback?next=/reset-password` });
         if (error) throw error; setOk("If that email exists, a reset link is on its way.");

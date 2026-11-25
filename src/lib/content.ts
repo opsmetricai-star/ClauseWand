@@ -1,143 +1,117 @@
-// All marketing copy lives here. Customer names, quotes and statistics are SAMPLE PLACEHOLDERS
-// (fictional companies) and must be replaced with real, permissioned content before launch.
+// Marketing copy. No customer names, quotes or statistics appear here until real, permissioned ones exist.
 
 export type Bullet = { t: string; d: string };
 export type FeaturePageData = {
   slug: string; badge: string; title: string; sub: string; href: string;
-  steps: Bullet[]; quote: { q: string; a: string; r: string };
-  blocks: { t: string; d: string; list?: string[] }[]; more: string[];
+  steps: Bullet[]; blocks: { t: string; d: string; list?: string[] }[]; more: string[];
 };
 
 export const FEATURES: Record<string, FeaturePageData> = {
   review: {
-    slug: "review", href: "/features/review", badge: "#1 pick for AI contract review",
-    title: "Your second set of eyes for every contract",
-    sub: "Upload a third-party agreement and get risks, missing protections and suggested redlines measured against your own standards in under a minute.",
+    slug: "review", href: "/features/review", badge: "AI contract review",
+    title: "An AI engine that reads every contract before your team does",
+    sub: "ClauseWand analyzes each agreement against your playbook, scores the risk, and drafts the replacement language. Review cycles shrink from days to minutes and exposure stops slipping through.",
     steps: [
-      { t: "Create custom playbooks", d: "Turn your negotiation positions into rules the AI applies on every contract, so the team stays consistent." },
-      { t: "Find risks and mistakes", d: "Surface one-sided indemnities, uncapped liability, auto-renewals, undefined terms and broken cross-references." },
-      { t: "Negotiate terms", d: "Get fallback language and a ranked list of asks so you walk into the call with a plan." },
+      { t: "Analyze", d: "Every clause is read in context and tested against your negotiating positions, not a generic checklist." },
+      { t: "Predict", d: "A risk score and ranked findings show which agreements threaten margin, liability or timelines." },
+      { t: "Decide", d: "Each finding carries a recommended action and ready-to-use fallback wording, so approvers move faster." },
     ],
     blocks: [
-      { t: "Insightful comments in one click", d: "Every flagged clause carries a plain-English explanation, the risk level and the reason it matters for your side.", list: ["Severity ranking: high, medium, low", "Clause-level citations back to the source text", "Explanations written for non-lawyers too"] },
-      { t: "Bulk approve", d: "Accept all the low-risk, in-policy suggestions together and spend your attention only on the clauses that deserve it." },
-      { t: "Redline in your name", d: "Suggested changes are produced as clean replacement language you can paste straight into your document with your own review attached." },
+      { t: "Findings your approvers can act on", d: "Each flagged clause includes the verbatim quote, the severity, the business impact and a suggested redline.", list: ["Severity ranking: high, medium, low", "Verbatim citations to the source text", "Suggested replacement language"] },
+      { t: "Playbook enforcement at machine speed", d: "Select a playbook and every rule is tested on every contract. Deviations are named after the rule they break." },
+      { t: "A defensible record of every decision", d: "Each review is stored with its findings, so legal, finance and audit can see what was flagged and why." },
     ],
-    quote: { q: "It gives me a confident first pass at 9pm that I used to spend my Monday morning on.", a: "Priya N.", r: "Commercial Counsel (sample testimonial)" },
     more: ["draft", "ask", "compare", "associate"],
   },
   draft: {
-    slug: "draft", href: "/features/draft", badge: "Drafting",
-    title: "Draft precise language, quickly",
-    sub: "Generate clauses and complete agreements tailored to your deal terms, your jurisdiction and your preferred positions.",
+    slug: "draft", href: "/features/draft", badge: "AI drafting",
+    title: "Generate deal-ready agreements from your terms and your precedents",
+    sub: "Describe the transaction and ClauseWand drafts the agreement, keeps defined terms consistent and flags every assumption it made.",
     steps: [
-      { t: "Describe the deal", d: "Give the parties, term, commercial terms and any must-haves in plain language." },
-      { t: "Choose a source", d: "Draft from scratch or ground the output in a precedent from your saved library." },
-      { t: "Refine and save", d: "Iterate with instructions, then save approved clauses to reuse on the next matter." },
+      { t: "Specify", d: "State the parties, term, commercial terms and non-negotiables in plain language." },
+      { t: "Ground", d: "Adapt one of your own approved contracts so the output reflects positions you have already won." },
+      { t: "Generate", d: "Receive numbered clauses with bracketed placeholders for every fact the engine could not know." },
     ],
     blocks: [
-      { t: "Draft from scratch or existing precedents", d: "Start with a blank page or load a precedent and adapt it. Defined terms and party names stay consistent." },
-      { t: "Draft in 140+ languages", d: "Review, draft and chat in the language your counterparty uses without a separate translation step." },
-      { t: "Save favourite clauses", d: "Build a library of approved language organised by contract type and reuse it with a click.", list: ["Tag clauses by contract type", "Version history for each clause", "Share across the team"] },
+      { t: "Precedent-grounded drafting", d: "Start from your own contracts, not a generic template. Party names, definitions and structure carry through." },
+      { t: "Drafting in 140+ languages", d: "Produce counterparty-ready drafts in the language of the deal without a separate translation step." },
+      { t: "A clause library that compounds", d: "Save approved language by contract type and reuse it on the next matter.", list: ["Organized by contract type", "Copy into any draft", "Shared standard across the team"] },
     ],
-    quote: { q: "A letter that used to take forty minutes is now a five minute edit.", a: "Marcus T.", r: "Associate (sample testimonial)" },
     more: ["review", "ask", "compare"],
   },
   compare: {
-    slug: "compare", href: "/features/compare", badge: "Market standards",
-    title: "See how your terms compare with the market",
-    sub: "Check any clause against what is typical for the contract type, industry and counterparty size, so you know when you are asking for too much or too little.",
+    slug: "compare", href: "/features/compare", badge: "Market benchmarking",
+    title: "Know where every clause sits against market practice",
+    sub: "ClauseWand benchmarks liability, termination, payment and data terms against what is typical for the contract type and your side of the table.",
     steps: [
-      { t: "Pick a clause", d: "Select a liability cap, termination right, payment term or any other provision." },
-      { t: "Benchmark it", d: "See whether it is favourable, standard or aggressive for your position." },
-      { t: "Negotiate with evidence", d: "Use the rationale and suggested alternative to justify your counter." },
+      { t: "Select a position", d: "Customer, supplier or neutral: the engine judges each term from your side." },
+      { t: "Benchmark", d: "Each clause is classed as favorable, standard, aggressive or missing." },
+      { t: "Counter with reasons", d: "Every verdict includes a rationale and an alternative you can send back." },
     ],
     blocks: [
-      { t: "Industry-aware benchmarks", d: "Comparisons adjust for the contract type and sector, so a SaaS MSA is not judged like a supply agreement." },
-      { t: "Clear verdicts", d: "Every clause gets a verdict, an explanation and a recommended alternative." },
+      { t: "Verdicts with reasoning", d: "No score without an explanation. Each clause shows why it is rated the way it is." },
+      { t: "Gap detection", d: "The engine names the protections a contract of this type should contain and does not." },
     ],
-    quote: { q: "Being able to say 'this is standard' with a reason behind it ends a lot of circular negotiation.", a: "Elena R.", r: "Legal Operations (sample testimonial)" },
     more: ["review", "draft", "playbooks"],
   },
   ask: {
-    slug: "ask", href: "/features/ask", badge: "Ask",
-    title: "Quick answers to complex questions",
-    sub: "Ask anything about a contract in plain language and get an answer grounded in the text, with the supporting clause quoted.",
+    slug: "ask", href: "/features/ask", badge: "AI contract Q&A",
+    title: "Put every contract in your portfolio on call",
+    sub: "Ask any question about an agreement and receive an answer grounded in its text, with the supporting clause quoted. If the contract is silent, the answer says so.",
     steps: [
-      { t: "Open a contract", d: "Choose any document from your repository." },
-      { t: "Ask in plain language", d: "'Can they terminate for convenience?' 'What happens to data on exit?'" },
-      { t: "Verify at the source", d: "Each answer quotes the clause it relied on so you can check it yourself." },
+      { t: "Select a contract", d: "Choose any agreement in your repository." },
+      { t: "Ask in plain language", d: "Termination rights, data obligations, renewal windows, payment triggers." },
+      { t: "Verify at the source", d: "Each answer cites the clause it relied on and states its confidence." },
     ],
     blocks: [
-      { t: "Grounded answers only", d: "If the contract does not address the question, the answer says so rather than guessing." },
-      { t: "Built for follow-ups", d: "Keep the conversation going and the context stays with the document." },
+      { t: "Grounded answers only", d: "The engine answers from the document and reports when a question is not addressed, instead of guessing." },
+      { t: "Decisions without a legal queue", d: "Commercial teams get the facts they need in seconds, and legal keeps its time for judgment." },
     ],
-    quote: { q: "Half my questions from the business now answer themselves.", a: "Daniel K.", r: "General Counsel (sample testimonial)" },
     more: ["review", "draft", "compare"],
   },
   playbooks: {
     slug: "playbooks", href: "/features/playbooks", badge: "Playbooks",
-    title: "Encode your legal standards once, apply them everywhere",
-    sub: "Playbooks translate the way your team negotiates into rules the AI checks on every contract, whether or not legal is in the room.",
+    title: "Turn your negotiating standards into rules the AI enforces",
+    sub: "Encode preferred positions, fallbacks and escalation triggers once. ClauseWand applies them to every agreement, whether or not legal is in the room.",
     steps: [
-      { t: "Write the rule", d: "Describe the preferred position, acceptable fallback and the point at which to escalate." },
-      { t: "Apply on review", d: "Select a playbook when you review and each rule is tested against the document." },
-      { t: "Improve over time", d: "Edit rules as your positions evolve and every future review follows them." },
+      { t: "Encode", d: "Write the preferred position, the acceptable fallback and the point to escalate." },
+      { t: "Enforce", d: "Select a playbook at review time and each rule is tested against the document." },
+      { t: "Refine", d: "Edit rules as your positions change and every future review follows them." },
     ],
     blocks: [
-      { t: "Rules with fallbacks", d: "Each rule carries a preferred position, a fallback and an escalation trigger.", list: ["Preferred wording", "Approved fallbacks", "Escalation guidance"] },
-      { t: "One standard across the team", d: "Junior team members and business users review to the same bar as your most senior lawyer." },
+      { t: "Rules with fallbacks and escalation", d: "Each rule carries a preferred position, an approved fallback and a trigger for senior review.", list: ["Preferred wording", "Approved fallbacks", "Escalation guidance"] },
+      { t: "One standard across the organization", d: "Every reviewer, junior or senior, internal or external, holds the same line." },
     ],
-    quote: { q: "Our playbook used to live in a PDF nobody opened. Now it is applied on every deal.", a: "Sofia L.", r: "Head of Legal (sample testimonial)" },
     more: ["review", "associate", "compare"],
   },
   associate: {
-    slug: "associate", href: "/associate", badge: "The AI agent for transactional law",
-    title: "Complete complex drafting projects across documents",
-    sub: "Plan and execute whole transactions: the agent works through multiple documents, keeps definitions aligned and flags conflicts between them.",
+    slug: "associate", href: "/associate", badge: "AI agent for transactions",
+    title: "An AI agent that runs multi-document transactions",
+    sub: "Associate plans the work across a set of agreements, applies changes consistently and surfaces conflicts between documents before the counterparty finds them.",
     steps: [
-      { t: "Plan and execute complete projects", d: "Describe the project and the agent proposes a plan of documents and changes." },
-      { t: "Revise multiple documents in one click", d: "Apply one instruction across an entire set of agreements consistently." },
-      { t: "See the big picture", d: "A cross-document view highlights inconsistencies before the other side finds them." },
+      { t: "Plan", d: "Describe the transaction and the agent proposes the documents and changes required." },
+      { t: "Execute", d: "Apply one instruction across an entire set of agreements consistently." },
+      { t: "Reconcile", d: "A cross-document view highlights mismatched terms and definitions." },
     ],
     blocks: [
-      { t: "Associate-like support on daunting projects", d: "Hand over the repetitive cross-checking and keep your judgment for the decisions." },
-      { t: "Built for commercial lawyers", d: "Designed around the way transactional teams really work: precedents, schedules, side letters and amendments." },
+      { t: "Cross-document consistency", d: "Definitions, dates and commercial terms stay aligned across master agreements, schedules and amendments." },
+      { t: "Built for transactional work", d: "Designed around precedents, schedules, side letters and amendments, the way deal teams actually operate." },
     ],
-    quote: { q: "What would have taken three weeks came together in four days.", a: "Noah B.", r: "Legal Operations Manager (sample testimonial)" },
     more: ["review", "draft", "ask"],
   },
 };
 
-export type SolutionData = { slug: string; name: string; kind: "industry" | "use"; title: string; sub: string; points: Bullet[]; stat: { n: string; l: string }; quote: { q: string; a: string } };
+export type SolutionData = { slug: string; name: string; kind: "industry" | "use"; title: string; sub: string; points: Bullet[]; outcomes: string[] };
 export const SOLUTIONS: Record<string, SolutionData> = {
-  energy: { slug: "energy", name: "Energy", kind: "industry", title: "Contracts for a market that never stands still", sub: "Power purchase agreements, EPC contracts and supply arrangements carry long terms and heavy exposure. Review them with consistency.", points: [{ t: "Long-term agreements, reviewed fast", d: "Pull out term, pricing mechanisms, change-in-law and force majeure provisions in minutes." }, { t: "Regulatory change language", d: "Check that regulatory risk is allocated the way your playbook requires." }, { t: "Counterparty variation", d: "Compare across suppliers to spot outliers in liability and termination rights." }], stat: { n: "60%", l: "less time on first-pass review (sample figure)" }, quote: { q: "We finally compare PPAs line by line instead of memory by memory.", a: "Contracts Lead, Energy (sample)" } },
-  healthcare: { slug: "healthcare", name: "Healthcare", kind: "industry", title: "Confidential contracts that deserve careful handling", sub: "Business associate agreements, vendor contracts and clinical research agreements demand privacy-first review.", points: [{ t: "Privacy obligations spotted", d: "Surface data protection duties, breach notification timelines and subcontractor flow-downs." }, { t: "Vendor risk standards", d: "Apply one vendor standard across every supplier agreement." }, { t: "Zero data retention", d: "Documents are processed without being used to train models." }], stat: { n: "2x", l: "contract throughput (sample figure)" }, quote: { q: "Compliance finally trusts the first pass.", a: "Privacy Counsel, Healthcare (sample)" } },
-  "financial-services": { slug: "financial-services", name: "Financial Services", kind: "industry", title: "Speed and rigour for regulated deal flow", sub: "ISDA schedules, credit agreements, NDAs and vendor paper arrive in volume. Keep every one measured against policy.", points: [{ t: "Policy-aligned review", d: "Test each document against your internal policies and risk appetite." }, { t: "Audit-ready trail", d: "Every review is saved with the findings and the rule that triggered them." }, { t: "Bulk NDAs, handled", d: "Approve standard NDAs quickly and escalate only the exceptions." }], stat: { n: "75%", l: "time saved on contract work (sample figure)" }, quote: { q: "NDAs no longer sit in a queue for a week.", a: "Deputy GC, Financial Services (sample)" } },
-  technology: { slug: "technology", name: "Technology", kind: "industry", title: "Close deals at the pace your product ships", sub: "SaaS agreements, DPAs and partner paper pile up when you grow. Keep legal from becoming the bottleneck.", points: [{ t: "SaaS MSA and DPA review", d: "Catch uncapped liability, data-use grants and unfavourable SLAs." }, { t: "Sales-friendly turnaround", d: "Give sales a reviewed redline the same day." }, { t: "Reusable fallbacks", d: "Standard fallbacks keep negotiations short." }], stat: { n: "30%", l: "efficiency lift (sample figure)" }, quote: { q: "Sales stopped asking where their redline was.", a: "Head of Legal, Technology (sample)" } },
-  manufacturing: { slug: "manufacturing", name: "Manufacturing", kind: "industry", title: "Supply chain contracts without the slowdown", sub: "Supplier agreements, distribution contracts and purchase terms span borders and languages. Review them in one place.", points: [{ t: "Multi-country supplier MSAs", d: "Review in 140+ languages against one standard." }, { t: "Warranty and recall terms", d: "Spot weak remedies and unclear responsibility." }, { t: "Consistent purchasing terms", d: "Compare incoming paper to your standard terms." }], stat: { n: "3w → 4d", l: "RFP process build (sample figure)" }, quote: { q: "One playbook now covers every supplier region.", a: "Procurement Counsel, Manufacturing (sample)" } },
-  "retail-consumer-goods": { slug: "retail-consumer-goods", name: "Retail & Consumer Goods", kind: "industry", title: "Handle seasonal contract spikes with ease", sub: "Retailer terms, licensing and distribution deals arrive in waves. Keep quality high when volume is higher.", points: [{ t: "Retailer paper, standardised", d: "Compare retailer terms against what you will accept." }, { t: "Licensing clarity", d: "Catch scope, territory and exclusivity mismatches." }, { t: "Fast approvals", d: "Approve in-policy changes together." }], stat: { n: "2x", l: "throughput with the same team (sample figure)" }, quote: { q: "Peak season no longer breaks the legal queue.", a: "Legal Manager, Retail (sample)" } },
-  "in-house-legal": { slug: "in-house-legal", name: "In-House", kind: "use", title: "Scale your judgment", sub: "Bring more work in-house, enforce one standard everywhere and stop being the department where requests go to wait.", points: [{ t: "Review third-party paper faster", d: "Redline in minutes, not days." }, { t: "Enforce one standard everywhere", d: "Playbooks hold the line even when legal is not in the room." }, { t: "Bring more work in-house", d: "Cut outside counsel spend on routine agreements." }], stat: { n: "40%", l: "less outside counsel spend (sample figure)" }, quote: { q: "We reduced outside counsel spend on routine paper significantly.", a: "General Counsel (sample)" } },
-  "law-firms": { slug: "law-firms", name: "Law Firms", kind: "use", title: "Deliver more to clients in less time", sub: "Give every associate a second set of eyes, speed up diligence and protect margin on fixed-fee work.", points: [{ t: "Cut weeks off diligence", d: "Extract and compare key terms across a data room." }, { t: "Negotiate from your precedents", d: "Start from the firm's best language, not a blank page." }, { t: "Consistent quality", d: "Hold every matter to the same standard." }], stat: { n: "55%", l: "time saved in pilot (sample figure)" }, quote: { q: "Our pilot group would not give it back.", a: "Partner, Law Firm (sample)" } },
+  energy: { slug: "energy", name: "Energy", kind: "industry", title: "Control long-term energy contract exposure", sub: "Power purchase agreements, EPC contracts and supply arrangements carry long terms and heavy exposure. ClauseWand analyzes them against your risk positions.", points: [{ t: "Long-term agreements, analyzed fast", d: "Extract term, pricing mechanisms, change-in-law and force majeure provisions in minutes." }, { t: "Regulatory change allocation", d: "Test whether regulatory risk sits where your playbook requires." }, { t: "Counterparty outliers", d: "Benchmark liability and termination rights across suppliers." }], outcomes: ["Shorter review cycles on high-value agreements", "Consistent risk allocation across the portfolio", "Earlier visibility of unfavorable change-in-law terms"] },
+  healthcare: { slug: "healthcare", name: "Healthcare", kind: "industry", title: "Automate review of regulated healthcare agreements", sub: "Business associate agreements, vendor contracts and research agreements demand privacy-first analysis at volume.", points: [{ t: "Privacy obligations surfaced", d: "Identify data protection duties, breach notification timelines and subcontractor flow-downs." }, { t: "One vendor standard", d: "Apply a single vendor risk playbook across every supplier agreement." }, { t: "No training on your documents", d: "Contracts are processed to produce your result and are not used to train models." }], outcomes: ["Faster vendor onboarding", "Uniform privacy-term enforcement", "A record of every review for compliance teams"] },
+  "financial-services": { slug: "financial-services", name: "Financial Services", kind: "industry", title: "Enforce policy across regulated deal flow", sub: "Credit agreements, NDAs, vendor paper and schedules arrive in volume. ClauseWand tests each against policy before it reaches an approver.", points: [{ t: "Policy-aligned review", d: "Measure every document against internal policy and risk appetite." }, { t: "Audit-ready trail", d: "Each review is stored with its findings and the rule that triggered them." }, { t: "Bulk NDA triage", d: "Clear standard NDAs automatically and escalate only exceptions." }], outcomes: ["Approvers see only the exceptions", "Policy applied the same way on every deal", "Traceable decisions for audit and regulators"] },
+  technology: { slug: "technology", name: "Technology", kind: "industry", title: "Remove legal as the bottleneck in your sales cycle", sub: "SaaS agreements, DPAs and partner paper accumulate as you grow. ClauseWand turns around a reviewed redline while the deal is still hot.", points: [{ t: "SaaS MSA and DPA analysis", d: "Catch uncapped liability, broad data-use grants and weak SLAs." }, { t: "Same-day redlines", d: "Return reviewed language to sales while the buyer is engaged." }, { t: "Reusable fallbacks", d: "Standard fallback positions shorten negotiation rounds." }], outcomes: ["Shorter sales cycles on paper-heavy deals", "Lower contract risk without more headcount", "Predictable turnaround for revenue teams"] },
+  manufacturing: { slug: "manufacturing", name: "Manufacturing", kind: "industry", title: "Standardize supplier terms across every region", sub: "Supplier agreements, distribution contracts and purchasing terms span borders and languages. ClauseWand reviews them to one standard.", points: [{ t: "Multi-country supplier MSAs", d: "Review in 140+ languages against a single playbook." }, { t: "Warranty and recall terms", d: "Detect weak remedies and unclear responsibility." }, { t: "Purchasing term compliance", d: "Compare incoming paper to your standard terms." }], outcomes: ["Consistent supplier terms across regions", "Reduced supply chain liability", "Faster procurement cycles"] },
+  "retail-consumer-goods": { slug: "retail-consumer-goods", name: "Retail & Consumer Goods", kind: "industry", title: "Absorb seasonal contract volume without adding headcount", sub: "Retailer terms, licensing and distribution deals arrive in waves. ClauseWand keeps review quality constant when volume spikes.", points: [{ t: "Retailer paper, standardized", d: "Compare retailer terms against what you will accept." }, { t: "Licensing clarity", d: "Catch scope, territory and exclusivity mismatches." }, { t: "Batch approvals", d: "Clear in-policy agreements together and escalate the rest." }], outcomes: ["Stable turnaround at peak volume", "Fewer unfavorable retailer terms signed", "Licensing risk visible before signature"] },
+  "in-house-legal": { slug: "in-house-legal", name: "In-House", kind: "use", title: "Scale your legal function without scaling its cost", sub: "ClauseWand lets in-house teams review third-party paper faster, enforce one standard everywhere and keep routine work off outside counsel.", points: [{ t: "Third-party paper, reviewed in minutes", d: "Receive findings and redlines before the first internal meeting." }, { t: "One standard enforced everywhere", d: "Playbooks hold the line even when legal is not in the room." }, { t: "More work kept in-house", d: "Handle routine agreements internally and reserve outside counsel for matters that need it." }], outcomes: ["Lower outside counsel spend on routine agreements", "Faster business turnaround", "Consistent positions across every business unit"] },
+  "law-firms": { slug: "law-firms", name: "Law Firms", kind: "use", title: "Deliver more client work at higher margin", sub: "ClauseWand gives every lawyer an analytical first pass, accelerates diligence and protects margin on fixed-fee engagements.", points: [{ t: "Diligence at scale", d: "Extract and compare key terms across a set of agreements." }, { t: "Negotiate from your own precedents", d: "Start from the firm's best language, not a blank page." }, { t: "Consistent quality", d: "Hold every matter to the same standard regardless of who staffs it." }], outcomes: ["More matters per lawyer", "Higher realization on fixed fees", "Uniform work product across the practice"] },
 };
-
-export const STORIES = [
-  { slug: "northwind-legal", co: "Northwind Legal", tag: "Law firm", q: "We had great results from our pilot group. They quoted 55% time saved.", t: "How a 40-lawyer firm cut first-pass review time by more than half", img: "from-amber-700/60 to-stone-800", metric: "55%", ml: "time saved" },
-  { slug: "halden-cloud", co: "Halden Cloud", tag: "In-house", q: "Instead of going to outside counsel, I put it through the platform and had the answer in minutes.", t: "Why Halden Cloud keeps more work in-house", img: "from-sky-900 to-slate-950", metric: "$300k", ml: "outside spend avoided" },
-  { slug: "orsa-industries", co: "Orsa Industries", tag: "Manufacturing", q: "It was ready to be used from the first day of a very short pilot.", t: "Orsa builds a formal RFP process in four days", img: "from-emerald-900 to-slate-950", metric: "3w → 4d", ml: "RFP build" },
-  { slug: "meridian-foundation", co: "Meridian Foundation", tag: "Non-profit", q: "The first product we saw that felt like a game-changer for contract review.", t: "A small legal team that behaves like a large one", img: "from-violet-900 to-slate-950", metric: "30%", ml: "efficiency lift" },
-];
-
-export const INTEGRATIONS: [string, string][] = [
-  ["Microsoft Word", "Review and draft directly inside your documents."], ["Google Drive", "Pull contracts from shared folders."], ["Slack", "Intake requests and send review summaries in channels."], ["Email", "Forward contracts in; get first-pass reviews back."], ["Salesforce", "Attach reviewed contracts to opportunities."], ["DocuSign", "Send approved agreements for signature."], ["SharePoint", "Sync repositories your firm already uses."], ["Zapier", "Connect everything else with automations."],
-];
-
-export const POSTS = [
-  { slug: "first-pass-review-checklist", t: "A practical checklist for first-pass contract review", d: "Nine checks that catch most problems before a senior lawyer ever opens the file.", date: "2026-10-14", tag: "Practice", body: ["A first-pass review is not about finding every issue. It is about finding the issues that change the decision.", "Start with the commercial anchors: term, renewal, fees and payment. Then move to risk allocation: liability caps, indemnities and exclusions. Finish with exit: termination rights and what happens to data and deliverables afterwards.", "Playbooks make this repeatable. Encode each check once and apply it to every contract, so quality does not depend on who happens to review."] },
-  { slug: "writing-your-first-playbook", t: "Writing your first playbook without overengineering it", d: "Start with ten rules and a clear fallback for each.", date: "2026-09-30", tag: "Playbooks", body: ["The most common mistake is trying to capture every position on day one.", "Pick the ten clauses you negotiate most often. For each, write the preferred position, an acceptable fallback and the point to escalate.", "Review a dozen real contracts with it, edit the rules that produced noise, and expand from there."] },
-  { slug: "ai-in-legal-confidentiality", t: "Confidentiality questions to ask any legal AI vendor", d: "Retention, training, sub-processors and audit trails.", date: "2026-09-12", tag: "Security", body: ["Ask whether your documents are retained, who can access them and whether they are used to train models.", "Ask for the list of sub-processors and where data is processed.", "Ask how access is logged, and whether you can export the log."] },
-  { slug: "from-clm-to-acm", t: "From CLM to autonomous contract management", d: "Why the repository is the start of the workflow, not the end.", date: "2026-08-21", tag: "Strategy", body: ["Traditional contract lifecycle tools store documents and track dates.", "An autonomous approach starts earlier: contracts are captured on arrival, reviewed against your standards and routed to the right person.", "The repository then becomes the by-product of the workflow rather than a chore."] },
-];
 
 export const CLAUSES = [
   { n: "Limitation of Liability", d: "Caps each party's exposure, usually to fees paid in the prior twelve months.", risk: "Look for uncapped liability, carve-outs that swallow the cap and one-sided caps." },
@@ -150,15 +124,22 @@ export const CLAUSES = [
   { n: "Assignment", d: "Controls whether rights can be transferred.", risk: "Change-of-control triggers can surprise you." },
 ];
 
+export const POSTS = [
+  { slug: "first-pass-review-checklist", t: "A first-pass review checklist for commercial contracts", d: "Nine checks that catch most problems before a senior lawyer opens the file.", date: "2026-10-14", tag: "Practice", body: ["A first-pass review is not about finding every issue. It is about finding the issues that change the decision.", "Start with the commercial anchors: term, renewal, fees and payment. Then move to risk allocation: liability caps, indemnities and exclusions. Finish with exit: termination rights and what happens to data and deliverables afterwards.", "Playbooks make this repeatable. Encode each check once and apply it to every contract, so quality does not depend on who happens to review."] },
+  { slug: "writing-your-first-playbook", t: "Writing your first playbook without overengineering it", d: "Start with ten rules and a clear fallback for each.", date: "2026-09-30", tag: "Playbooks", body: ["The most common mistake is trying to capture every position on day one.", "Pick the ten clauses you negotiate most often. For each, write the preferred position, an acceptable fallback and the point to escalate.", "Review a dozen real contracts with it, edit the rules that produced noise, and expand from there."] },
+  { slug: "ai-in-legal-confidentiality", t: "Confidentiality questions to ask any legal AI vendor", d: "Retention, training, sub-processors and audit trails.", date: "2026-09-12", tag: "Security", body: ["Ask whether your documents are retained, who can access them and whether they are used to train models.", "Ask for the list of sub-processors and where data is processed.", "Ask how access is logged, and whether you can export the log."] },
+  { slug: "from-clm-to-acm", t: "From contract storage to autonomous contract management", d: "Why the repository should be the output of the workflow, not the start of it.", date: "2026-08-21", tag: "Strategy", body: ["Traditional contract lifecycle tools store documents and track dates.", "An autonomous approach starts earlier: contracts are captured on arrival, reviewed against your standards and routed to the right person.", "The repository then becomes the by-product of the workflow rather than a chore."] },
+];
+
 export const FAQ_ACM: [string, string][] = [
-  ["What is autonomous contract management?", "A workflow that captures contracts as they arrive, runs a first-pass review against your standards, routes work to the right people and stores everything in a searchable repository."],
-  ["How is it different from a CLM?", "A CLM mostly stores contracts and tracks dates. Autonomous contract management does the review and routing work itself, then files the result."],
-  ["Do you train on our contracts?", "No. We use providers with zero data retention terms and never train on customer documents."],
-  ["Which sources can it pull contracts from?", "Uploads today, with email, Slack and drive connectors on the integration roadmap."],
+  ["What is autonomous contract management?", "A workflow that captures contracts as they arrive, runs a first-pass review against your standards, routes work to the right people and files everything in a searchable repository."],
+  ["How is it different from a CLM?", "A CLM mostly stores contracts and tracks dates. Autonomous contract management performs the review and routing itself, then files the result."],
+  ["Is my data used to train models?", "No. Your contracts are processed to produce your result and are not used to train models."],
+  ["How do contracts enter the system?", "By upload or pasted text today. Each contract is stored, reviewed and searchable from your repository."],
 ];
 export const FAQ_SEC: [string, string][] = [
-  ["Where is data stored?", "In a managed Postgres database with row level security, so users only ever see their own records."],
-  ["Is my data used to train models?", "No. Documents are sent to the model provider with retention disabled and are not used for training."],
-  ["How is access controlled?", "Authenticated sessions, row level security on every table and server-side checks on every AI request."],
+  ["Where is data stored?", "In a managed Postgres database with row-level security, so each user can only read their own records."],
+  ["Is my data used to train models?", "No. Documents are sent to the model provider to produce your result and are not used for training."],
+  ["How is access controlled?", "Authenticated sessions, row-level security on every table and server-side checks on every AI request."],
   ["Can I delete my data?", "Yes. Deleting a contract removes the record and its stored file."],
 ];

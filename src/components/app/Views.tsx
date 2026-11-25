@@ -47,7 +47,7 @@ export function AnswerView({ a }: { a: Answer }) {
   );
 }
 
-const VERDICT = { favourable: "bg-emerald-100 text-emerald-800", standard: "bg-sky-100 text-sky-800", aggressive: "bg-red-100 text-red-800", missing: "bg-amber-100 text-amber-800" } as const;
+const VERDICT = { favorable: "bg-emerald-100 text-emerald-800", standard: "bg-sky-100 text-sky-800", aggressive: "bg-red-100 text-red-800", missing: "bg-amber-100 text-amber-800" } as const;
 export function CompareView({ c }: { c: Comparison }) {
   return (
     <div className="space-y-3">

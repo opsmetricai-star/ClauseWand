@@ -1,8 +1,7 @@
 // Single source of truth for the brand. Rename here and everywhere updates.
 export const BRAND = {
   name: "ClauseWand",
-  tagline: "Automate reviews, streamline negotiations, and keep every deal moving around the clock.",
-  email: "hello@clausewand.com",
+  tagline: "The AI engine that analyzes, scores and routes every contract, so deals close faster and risk stops slipping through.",
 };
 
 // Payment links supplied by the owner (Selar). Verified activation happens server-side, see /api/billing/webhook.
@@ -40,7 +39,7 @@ export const NAV = {
       { t: "Playbooks", d: "Encode your legal standards", h: "/features/playbooks" },
     ],
     products: [{ t: "Autonomous Contract Management", d: "Powering contracts end-to-end", h: "/acm" }],
-    platform: [{ t: "Integrations", d: "Works with your existing systems", h: "/integrations" }],
+    platform: [],
   },
   industries: [
     { t: "Energy", h: "/solutions/energy" },
@@ -57,24 +56,18 @@ export const NAV = {
   resources: {
     learn: [
       { t: "Blog", h: "/blog" },
-      { t: "Guides & Reports", h: "/guides-reports" },
-      { t: "Learn", h: "/learn" },
-      { t: "Newsletter", h: "/newsletter" },
     ],
     tools: [
       { t: "Clause Index", h: "/clause-index" },
-      { t: "Briefs", h: "/briefs" },
       { t: "ROI Calculator", h: "/roi-calculator" },
-      { t: "State of Contracts", h: "/state-of-legal-contracts" },
     ],
   },
 };
 
 export const FOOTER: { h: string; l: [string, string][] }[] = [
-  { h: "Product", l: [["Review", "/features/review"], ["Associate", "/associate"], ["Draft", "/features/draft"], ["Compare", "/features/compare"], ["Ask", "/features/ask"], ["Playbooks", "/features/playbooks"], ["Autonomous Contract Management", "/acm"], ["Integrations", "/integrations"], ["Pricing", "/pricing"]] },
+  { h: "Product", l: [["Review", "/features/review"], ["Associate", "/associate"], ["Draft", "/features/draft"], ["Compare", "/features/compare"], ["Ask", "/features/ask"], ["Playbooks", "/features/playbooks"], ["Autonomous Contract Management", "/acm"], ["Pricing", "/pricing"]] },
   { h: "Solutions", l: [["In-House", "/solutions/in-house-legal"], ["Law Firms", "/solutions/law-firms"], ["Energy", "/solutions/energy"], ["Healthcare", "/solutions/healthcare"], ["Financial Services", "/solutions/financial-services"], ["Technology", "/solutions/technology"], ["Manufacturing", "/solutions/manufacturing"], ["Retail & Consumer Goods", "/solutions/retail-consumer-goods"]] },
-  { h: "Resources", l: [["Blog", "/blog"], ["Guides & Reports", "/guides-reports"], ["Learn", "/learn"], ["Clause Index", "/clause-index"], ["Briefs", "/briefs"], ["ROI Calculator", "/roi-calculator"], ["Customer Stories", "/stories"], ["State of Contracts", "/state-of-legal-contracts"]] },
-  { h: "Company", l: [["About", "/about"], ["Careers", "/careers"], ["Press", "/press"], ["Contact", "/contact"], ["Security", "/security"]] },
-  { h: "Community", l: [["Partners", "/partners"], ["Academic Program", "/academic"], ["Newsletter", "/newsletter"]] },
-  { h: "Support", l: [["Help Center", "/contact"], ["Terms of Service", "/legal/terms-of-service"], ["Privacy Policy", "/legal/privacy-policy"], ["Refund Policy", "/legal/refund-policy"], ["Vulnerability Disclosure", "/legal/vulnerability-disclosure"]] },
+  { h: "Resources", l: [["Blog", "/blog"], ["Clause Index", "/clause-index"], ["ROI Calculator", "/roi-calculator"]] },
+  { h: "Company", l: [["About", "/about"], ["Security", "/security"]] },
+  { h: "Legal", l: [["Terms of Service", "/legal/terms-of-service"], ["Privacy Policy", "/legal/privacy-policy"], ["Refund Policy", "/legal/refund-policy"], ["Vulnerability Disclosure", "/legal/vulnerability-disclosure"]] },
 ];

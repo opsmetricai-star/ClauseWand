@@ -32,7 +32,7 @@ export default function NewContract() {
         </div>
       ) : (
         <form onSubmit={(e) => { e.preventDefault(); const fd = new FormData(e.currentTarget); send(JSON.stringify({ title: fd.get("title"), text: fd.get("text") }), { "Content-Type": "application/json" }); }} className="space-y-3">
-          <input name="title" className="field" placeholder="Title, e.g. Vendor MSA — Acme" required />
+          <input name="title" className="field" placeholder="Title, e.g. Vendor MSA: Acme" required />
           <textarea name="text" className="field min-h-[220px]" placeholder="Paste the contract text…" required />
           <button className="btn btn-dark" disabled={busy}>{busy ? "Saving…" : "Save contract"}</button>
         </form>

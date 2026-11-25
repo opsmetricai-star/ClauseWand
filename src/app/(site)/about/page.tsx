@@ -1,12 +1,12 @@
 import { InfoPage } from "@/components/site/InfoPage";
 export const metadata = { title: "About" };
 export default function Page() {
-  return <InfoPage d={{ eyebrow: "About", title: "We help lawyers do more of the work they love", sub: "Contract work should not mean copy, paste and late nights. We build tools that take the repetition away and leave the judgment with you.", cta: ["Get started for free", "/signup"], cardsTitle: "What we believe", cards: [
-    { t: "Judgment stays human", d: "AI does the first pass. Lawyers make the call, and every suggestion shows its reasoning." },
-    { t: "Confidentiality first", d: "Client documents are never used for training, and access is isolated per user." },
-    { t: "Your standards, not ours", d: "The product adapts to your playbooks instead of imposing a generic view of risk." },
-    { t: "Built with practitioners", d: "Features start from real matters: diligence, vendor paper, NDAs and renewals." },
-    { t: "Honest about limits", d: "We label what is live and what is planned, and we show when an answer is uncertain." },
-    { t: "Plain-language pricing", d: "Three simple plans and a free tier, with allowances you can see in your dashboard." },
+  return <InfoPage d={{ eyebrow: "About ClauseWand", title: "We are building the AI operating layer for contracts", sub: "Contract work should not depend on copy, paste and late nights. ClauseWand automates the analysis so people can focus on decisions.", cta: ["Sign up", "/signup"], cardsTitle: "Principles", cards: [
+    { t: "AI at the core", d: "The engine is the product. Analysis, scoring, drafting and routing all run on it." },
+    { t: "Judgment stays human", d: "AI does the first pass. People make the call, and every finding shows its reasoning." },
+    { t: "Confidentiality first", d: "Documents are isolated per user and never used to train models." },
+    { t: "Your standards, enforced", d: "Playbooks encode your positions, and the engine applies them consistently." },
+    { t: "Grounded answers", d: "Answers quote the contract. When a document is silent, the engine says so." },
+    { t: "Transparent pricing", d: "Three plans and a free tier, with allowances visible in your workspace." },
   ] }} />;
 }

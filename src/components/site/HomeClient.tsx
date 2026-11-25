@@ -1,8 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Play } from "lucide-react";
-import { STORIES } from "@/lib/content";
 
 const TABS = [
   { k: "Intake", d: "Contracts are pulled in automatically from email and Slack with a full first-pass review run against your standards", items: ["Vendor MSA received from procurement@", "Classified as: Master Services Agreement", "First-pass review queued"] },
@@ -50,61 +48,3 @@ export function AcmTabs() {
   );
 }
 
-export function StoryCarousel() {
-  const ref = useRef<HTMLDivElement>(null);
-  const go = (d: number) => ref.current?.scrollBy({ left: d * 700, behavior: "smooth" });
-  return (
-    <div>
-      <div className="mb-8 flex items-end justify-between">
-        <h2 className="h-display t-2 max-w-[760px]">Designed for in-house teams and law firms</h2>
-        <div className="flex gap-3">
-          <button aria-label="Previous" onClick={() => go(-1)} className="flex h-12 w-12 items-center justify-center rounded-full border border-line hover:bg-accent-light"><ArrowLeft size={18} /></button>
-          <button aria-label="Next" onClick={() => go(1)} className="flex h-12 w-12 items-center justify-center rounded-full border border-line hover:bg-accent-light"><ArrowRight size={18} /></button>
-        </div>
-      </div>
-      <div ref={ref} className="no-scrollbar -mr-[52px] flex snap-x gap-6 overflow-x-auto pr-[52px]">
-        {STORIES.map((s) => (
-          <Link key={s.slug} href={`/stories/${s.slug}`} className={`group relative flex h-[520px] w-[88vw] flex-none snap-start flex-col justify-between overflow-hidden rounded-sm bg-gradient-to-br ${s.img} p-8 text-white md:w-[calc(50%-12px)] lg:w-[calc(60%-12px)]`}>
-            <div className="font-serif text-[28px] tracking-tight">{s.co}</div>
-            <div className="max-w-[420px]">
-              <p className="text-[24px] font-medium leading-snug">“{s.q}”</p>
-              <span className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-[14px] backdrop-blur group-hover:bg-white/25"><Play size={14} fill="currentColor" /> Watch Video</span>
-            </div>
-            <div className="absolute right-8 top-8 text-right"><div className="font-serif text-[56px] leading-none">{s.metric}</div><div className="text-[13px] text-white/80">{s.ml}</div></div>
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export function LeadForm() {
-  const [state, setState] = useState<"idle" | "busy" | "ok" | "err">("idle");
-  const [err, setErr] = useState("");
-  async function submit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const f = e.currentTarget; const fd = new FormData(f);
-    setState("busy");
-    const r = await fetch("/api/public/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ kind: "demo", ...Object.fromEntries(fd) }) });
-    const j = await r.json().catch(() => ({}));
-    if (r.ok) { setState("ok"); f.reset(); } else { setState("err"); setErr(j.error ?? "Could not send. Please try again."); }
-  }
-  if (state === "ok") return <div className="rounded bg-white p-10 text-ink"><h3 className="h-display t-3">Thank you.</h3><p className="mt-2 text-muted">We will be in touch within one business day.</p></div>;
-  return (
-    <form onSubmit={submit} className="space-y-4 rounded bg-white p-8 text-ink">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div><label className="lbl">Name</label><input className="field" name="name" required /></div>
-        <div><label className="lbl">Work email</label><input className="field" type="email" name="email" required /></div>
-      </div>
-      <div><label className="lbl">Company</label><input className="field" name="company" /></div>
-      <fieldset>
-        <legend className="lbl">Are you a legal professional?*</legend>
-        {["Yes, transactional law at a firm", "Yes, in-house legal", "Yes, litigation", "No, I work with legal tech", "No, but I’d love to try it"].map((o, n) => (
-          <label key={o} className="flex items-center gap-2 py-1 text-[15px]"><input type="radio" name="role" value={o} required defaultChecked={n === 1} /> {o}</label>
-        ))}
-      </fieldset>
-      <button className="btn btn-dark w-full" disabled={state === "busy"}>{state === "busy" ? "Sending…" : "Book a Demo"}</button>
-      {state === "err" && <p className="text-sm text-red-600" role="alert">{err}</p>}
-    </form>
-  );
-}

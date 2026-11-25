@@ -8,7 +8,7 @@ export function ReviewMock({ dark = false, className = "" }: { dark?: boolean; c
     <div className={`overflow-hidden rounded-md border shadow-2xl ${bg} ${className}`}>
       <div className={`flex items-center gap-2 border-b px-4 py-3 ${dark ? "border-white/10" : "border-line"}`}>
         <span className="h-2.5 w-2.5 rounded-full bg-red-400" /><span className="h-2.5 w-2.5 rounded-full bg-amber-400" /><span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-        <span className={`ml-3 flex items-center gap-1.5 text-[13px] ${sub}`}><FileText size={14} /> Master Services Agreement — Vendor.docx</span>
+        <span className={`ml-3 flex items-center gap-1.5 text-[13px] ${sub}`}><FileText size={14} /> Master Services Agreement: Vendor.docx</span>
       </div>
       <div className="grid md:grid-cols-[1.4fr_1fr]">
         <div className="space-y-3 p-5 text-[13px] leading-relaxed">

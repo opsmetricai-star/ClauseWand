@@ -35,7 +35,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
       <h2 className="mb-3 mt-10 font-serif text-[24px]">Payment history</h2>
       <div className="card divide-y divide-line">
         {(pays ?? []).length === 0 && <div className="p-6 text-muted">No payments recorded yet.</div>}
-        {(pays ?? []).map((p) => <div key={p.reference} className="flex flex-wrap justify-between gap-2 p-4 text-[14px]"><span className="capitalize">{p.plan}</span><span>{p.amount ? `${p.amount} ${p.currency ?? ""}` : "—"}</span><span className="text-muted">{p.status} · {new Date(p.created_at).toLocaleDateString()}</span></div>)}
+        {(pays ?? []).map((p) => <div key={p.reference} className="flex flex-wrap justify-between gap-2 p-4 text-[14px]"><span className="capitalize">{p.plan}</span><span>{p.amount ? `${p.amount} ${p.currency ?? ""}` : "Not recorded"}</span><span className="text-muted">{p.status} · {new Date(p.created_at).toLocaleDateString()}</span></div>)}
       </div>
     </>
   );

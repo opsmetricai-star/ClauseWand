@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     const system = `${SYSTEM_BASE}
 Task: benchmark the key clauses of this contract against what is typical in the market for this contract type${p.data.industry ? ` in the ${p.data.industry} sector` : ""}, from the ${p.data.position}'s point of view.
 State clearly that benchmarks are the model's general knowledge, not a dataset. Cover liability, indemnity, termination, term/renewal, payment, confidentiality, governing law, IP and data where present; use verdict "missing" when a usual clause is absent.
-JSON shape: {"overall":string,"clauses":[{"clause":string,"verdict":"favourable"|"standard"|"aggressive"|"missing","rationale":string,"suggested_alternative":string}]}`;
+JSON shape: {"overall":string,"clauses":[{"clause":string,"verdict":"favorable"|"standard"|"aggressive"|"missing","rationale":string,"suggested_alternative":string}]}`;
     const { data, tokens } = await generateJson(system, `CONTRACT TEXT:\n${clip(c.content)}`, compareSchema);
     const { data: row, error } = await sb.from("comparisons").insert({ user_id: user.id, contract_id: c.id, position: p.data.position, result: data }).select("id").single();
     if (error) throw error;

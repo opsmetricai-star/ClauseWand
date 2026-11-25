@@ -3,11 +3,11 @@ import { ShieldCheck } from "lucide-react";
 import { FAQ_SEC } from "@/lib/content";
 
 export const metadata = { title: "Security & Compliance" };
-const CARDS = [["Row level isolation", "Every table is protected by row level security. Users can only read and write their own records."], ["Zero data retention", "Documents are processed without being retained or used for model training by the AI provider."], ["Encrypted in transit and at rest", "All traffic uses TLS, and storage and database are encrypted at rest by the platform."], ["Audit trail", "Every review, draft and question is logged with a timestamp and the user who ran it."], ["Server-side secrets", "API keys never reach the browser. All AI calls are made from the server."], ["Compliance roadmap", "We are building toward SOC 2 Type II, GDPR and HIPAA readiness. Certification claims will be listed here only once achieved."]];
+const CARDS = [["Row level isolation", "Every table is protected by row level security. Users can only read and write their own records."], ["Zero data retention", "Documents are processed without being retained or used for model training by the AI provider."], ["Encrypted in transit and at rest", "All traffic uses TLS, and storage and database are encrypted at rest by the platform."], ["Audit trail", "Every review, draft and question is logged with a timestamp and the user who ran it."], ["Server-side secrets", "API keys never reach the browser. All AI calls are made from the server."], ["Minimal data handling", "Only the documents and account details you provide are stored, and you can delete a contract and its file at any time."]];
 export default function Page() {
   return (
     <>
-      <PageHero eyebrow="Security & Compliance" title="Enterprise-grade security for law firms and in-house teams" sub="Confidentiality is the starting requirement, not a feature." />
+      <PageHero eyebrow="Security" title="Enterprise-grade security for law firms and in-house teams" sub="Confidentiality is the starting requirement, not a feature." />
       <section className="py-24"><div className="container-x grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {CARDS.map(([t, d]) => <div key={t} className="rounded border border-line p-8"><ShieldCheck strokeWidth={1.3} size={34} /><h2 className="mt-5 font-serif text-[26px]">{t}</h2><p className="mt-2 text-muted">{d}</p></div>)}
       </div></section>

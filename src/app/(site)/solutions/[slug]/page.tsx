@@ -15,9 +15,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   if (!d) notFound();
   return (
     <>
-      <PageHero eyebrow={d.kind === "industry" ? `Solutions · ${d.name}` : `Solutions · ${d.name}`} title={d.title} sub={d.sub}>
-        <Link href="/signup" className="btn btn-light">Get started for free</Link>
-        <Link href="/contact" className="btn btn-ghost text-white">Talk to us</Link>
+      <PageHero eyebrow={`Solutions: ${d.name}`} title={d.title} sub={d.sub}>
+        <Link href="/signup" className="btn btn-light">Sign up</Link>
+        <Link href="/login" className="btn btn-ghost text-white">Log in</Link>
       </PageHero>
       <section className="py-24">
         <div className="container-x grid gap-10 md:grid-cols-3">
@@ -29,15 +29,14 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       <section className="mode-light-accent py-24">
         <div className="container-x grid items-center gap-12 lg:grid-cols-2">
           <ReviewMock />
-          <div><h2 className="h-display text-[96px] leading-none">{d.stat.n}</h2><p className="mt-3 text-[18px] text-muted">{d.stat.l}</p>
-            <blockquote className="h-display t-3 mt-10">“{d.quote.q}”</blockquote><p className="mt-3 text-muted">{d.quote.a}</p></div>
+          <div><h2 className="h-display t-2">What the engine delivers</h2><ul className="mt-6 space-y-4">{d.outcomes.map((o) => <li key={o} className="border-t border-ink pt-4 text-[18px]">{o}</li>)}</ul></div>
         </div>
       </section>
       <section className="py-24">
         <div className="container-x">
-          <h2 className="h-display t-3">What to expect in your first days</h2>
+          <h2 className="h-display t-3">From sign-up to first result</h2>
           <ol className="mt-8 grid gap-6 md:grid-cols-3">
-            {[["Day 1", "Create your account and upload a few real contracts."], ["Day 2", "Write your first playbook from the clauses you negotiate most."], ["Day 3", "Review against it, refine the rules and invite your team."]].map(([a, b]) => (
+            {[["Day 1", "Create your account and add a few real contracts."], ["Day 2", "Encode your first playbook from the clauses you negotiate most."], ["Day 3", "Run reviews against it and refine the rules."]].map(([a, b]) => (
               <li key={a} className="rounded border border-line p-6"><div className="font-serif text-[28px]">{a}</div><p className="mt-2 text-muted">{b}</p></li>
             ))}
           </ol>

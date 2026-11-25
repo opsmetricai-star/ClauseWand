@@ -24,8 +24,8 @@ export function FeaturePage({ d }: { d: FeaturePageData }) {
   return (
     <>
       <PageHero eyebrow={d.badge} title={d.title} sub={d.sub}>
-        <Link href="/signup" className="btn btn-light">Get started for free</Link>
-        <Link href="/pricing" className="btn btn-ghost text-white">See pricing</Link>
+        <Link href="/signup" className="btn btn-light">Sign up</Link>
+        <Link href="/login" className="btn btn-ghost text-white">Log in</Link>
       </PageHero>
       <section className="mode-light-accent pb-24 pt-0">
         <div className="container-x -mt-10 md:-mt-16"><ReviewMock /></div>
@@ -53,12 +53,6 @@ export function FeaturePage({ d }: { d: FeaturePageData }) {
           </div>
         </section>
       ))}
-      <section className="mode-dark py-24">
-        <div className="container-x max-w-[900px]">
-          <blockquote className="h-display t-2">“{d.quote.q}”</blockquote>
-          <p className="mt-6 text-white/70">{d.quote.a} · {d.quote.r}</p>
-        </div>
-      </section>
       <section className="py-24">
         <div className="container-x">
           <h2 className="h-display t-3">More features to explore</h2>

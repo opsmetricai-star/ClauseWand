@@ -19,7 +19,7 @@ Amounts of 47/57/97 map to Solo/Team/Firm. Customers must pay with the same emai
 Import the repo, set the env vars from `.env.example`, deploy. Set `BILLING_WEBHOOK_SECRET` before giving Selar the webhook URL.
 
 ## Known limitations
-- Customer names, quotes and statistics on marketing pages are fictional placeholders.
-- Integrations (Word, Slack, email, etc.) are listed as planned; not built.
-- Legal pages are templates and need counsel review.
-- Market comparison uses the model's general knowledge, not a licensed dataset.
+- Integrations (Word, Slack, email) are not built and are not advertised.
+- Legal pages are templates and need review by counsel.
+- Market comparison uses the model general knowledge, not a licensed dataset.
+- Set NEXT_PUBLIC_SITE_URL and the Supabase Site URL to the production domain so email links never point at localhost.

@@ -7,7 +7,7 @@ const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 const newsreader = Newsreader({ variable: "--font-newsreader", subsets: ["latin"], weight: ["300", "400"] });
 
 export const metadata: Metadata = {
-  title: { default: `${BRAND.name} — The complete contract AI suite`, template: `%s | ${BRAND.name}` },
+  title: { default: `${BRAND.name}: The complete contract AI suite`, template: `%s | ${BRAND.name}` },
   description: BRAND.tagline,
 };
 

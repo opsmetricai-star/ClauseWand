@@ -13,16 +13,21 @@ const KEY: Record<Kind, keyof Limits> = { review: "reviews", compare: "reviews",
 
 export const periodStart = () => { const d = new Date(); return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1)).toISOString(); };
 
+type Prof = { plan?: string | null; plan_status?: string | null } | null;
+export function summarize(profile: Prof, events: { kind: string }[] | null) {
+  const plan = ((profile?.plan_status ?? "active") === "active" ? profile?.plan : "free") as PlanId | undefined ?? "free";
+  const used = { reviews: 0, drafts: 0, asks: 0 };
+  for (const e of events ?? []) used[KEY[e.kind as Kind] as "reviews" | "drafts" | "asks"]++;
+  return { plan, limits: limitsFor(plan), used };
+}
+
 export async function getUsage(userId: string) {
   const admin = createAdmin();
   const [{ data: profile }, { data: events }] = await Promise.all([
     admin.from("profiles").select("plan, plan_status").eq("id", userId).single(),
     admin.from("usage_events").select("kind").eq("user_id", userId).gte("created_at", periodStart()),
   ]);
-  const plan = (profile?.plan_status === "active" ? profile?.plan : "free") as PlanId ?? "free";
-  const used = { reviews: 0, drafts: 0, asks: 0 };
-  for (const e of events ?? []) used[KEY[e.kind as Kind] as "reviews" | "drafts" | "asks"]++;
-  return { plan, limits: limitsFor(plan), used };
+  return summarize(profile, events);
 }
 
 /** Throws a 402-style error if the allowance is exhausted. */

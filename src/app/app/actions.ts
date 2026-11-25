@@ -86,7 +86,7 @@ export async function markNotificationsRead() {
 export async function adminActivate(_: unknown, fd: FormData): Promise<{ error?: string; ok?: string }> {
   const { user } = await me();
   const admins = (process.env.ADMIN_EMAILS ?? "").split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
-  if (!user.email || !admins.includes(user.email.toLowerCase())) return { error: "Not authorised." };
+  if (!user.email || !admins.includes(user.email.toLowerCase())) return { error: "Not authorized." };
   const email = String(fd.get("email") ?? "").trim().toLowerCase();
   const plan = String(fd.get("plan"));
   if (!["free", "solo", "team", "firm"].includes(plan)) return { error: "Unknown plan." };

@@ -125,7 +125,7 @@ export const compareSchema = z.object({
   overall: z.string(),
   clauses: z.array(z.object({
     clause: z.string(),
-    verdict: z.enum(["favourable", "standard", "aggressive", "missing"]),
+    verdict: z.enum(["favorable", "standard", "aggressive", "missing"]),
     rationale: z.string(),
     suggested_alternative: z.string(),
   })),

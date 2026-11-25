@@ -15,7 +15,7 @@ export function PlaybookEditor({ initial }: { initial?: { id: string; name: stri
     <form action={action} className="card space-y-4 p-6">
       {initial && <input type="hidden" name="id" value={initial.id} />}
       <input type="hidden" name="rules" value={JSON.stringify(rules.filter((r) => r.title.trim()))} />
-      <div className="grid gap-4 md:grid-cols-2"><div><label className="lbl">Playbook name</label><input name="name" className="field" defaultValue={initial?.name} required placeholder="Vendor MSA — buyer side" /></div><div><label className="lbl">Description</label><input name="description" className="field" defaultValue={initial?.description ?? ""} /></div></div>
+      <div className="grid gap-4 md:grid-cols-2"><div><label className="lbl">Playbook name</label><input name="name" className="field" defaultValue={initial?.name} required placeholder="Vendor MSA: buyer side" /></div><div><label className="lbl">Description</label><input name="description" className="field" defaultValue={initial?.description ?? ""} /></div></div>
       {rules.map((r, i) => (
         <div key={i} className="space-y-3 rounded border border-line bg-accent-light p-4">
           <div className="flex gap-2"><input className="field" placeholder="Rule title, e.g. Limitation of liability" value={r.title} onChange={(e) => set(i, "title", e.target.value)} />
@@ -52,7 +52,7 @@ export function ProfileForm({ name, org, email }: { name: string; org: string; e
     <form action={a} className="card max-w-[560px] space-y-4 p-6">
       <div><label className="lbl">Email</label><input className="field bg-accent-light" value={email} disabled /></div>
       <div><label className="lbl">Full name</label><input name="full_name" className="field" defaultValue={name} /></div>
-      <div><label className="lbl">Organisation</label><input name="organization" className="field" defaultValue={org} /></div>
+      <div><label className="lbl">Organization</label><input name="organization" className="field" defaultValue={org} /></div>
       <div className="flex items-center gap-3"><button className="btn btn-dark btn-sm" disabled={p}>{p ? "Saving…" : "Save changes"}</button><Msg s={s} /></div>
     </form>
   );
@@ -80,7 +80,7 @@ export function DraftStudio({ precedents }: { precedents: { id: string; title: s
   return (
     <div className="grid gap-6 xl:grid-cols-2">
       <form onSubmit={go} className="card space-y-4 p-6">
-        <div><label className="lbl">Title</label><input name="title" className="field" required placeholder="Mutual NDA — Acme / Globex" /></div>
+        <div><label className="lbl">Title</label><input name="title" className="field" required placeholder="Mutual NDA: Acme / Globex" /></div>
         <div><label className="lbl">Describe the deal</label><textarea name="instructions" rows={7} className="field" required placeholder="Parties, term, governing law, key commercial terms, must-have protections…" /></div>
         <div className="grid gap-3 sm:grid-cols-2">
           <div><label className="lbl">Base on a precedent</label><select name="precedentId" className="field"><option value="">From scratch</option>{precedents.map((p) => <option key={p.id} value={p.id}>{p.title}</option>)}</select></div>
