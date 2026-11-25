@@ -177,3 +177,15 @@ create policy "contracts read own" on storage.objects for select to authenticate
   using (bucket_id = 'contracts' and (storage.foldername(name))[1] = auth.uid()::text);
 create policy "contracts delete own" on storage.objects for delete to authenticated
   using (bucket_id = 'contracts' and (storage.foldername(name))[1] = auth.uid()::text);
+
+-- API role grants (RLS still applies to anon/authenticated) -----------------
+grant usage on schema public to anon, authenticated, service_role;
+grant all on all tables in schema public to service_role;
+grant all on all sequences in schema public to service_role;
+grant select, insert, update, delete on all tables in schema public to authenticated;
+grant usage, select on all sequences in schema public to authenticated;
+revoke update on public.profiles from authenticated;
+grant update (full_name, organization) on public.profiles to authenticated;
+revoke insert, update, delete on public.usage_events, public.payments from authenticated;
+revoke all on public.leads from authenticated;
+alter default privileges in schema public grant all on tables to service_role;

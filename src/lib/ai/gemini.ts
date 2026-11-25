@@ -5,34 +5,61 @@ export class AiError extends Error {
   constructor(message: string, public status = 502) { super(message); }
 }
 
-function model(json: boolean) {
+const MODELS = () => [...new Set([process.env.GEMINI_MODEL, "gemini-3.5-flash", "gemini-3.8-flash"].filter(Boolean) as string[])];
+
+function client() {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new AiError("AI is not configured. Set GEMINI_API_KEY on the server.", 503);
-  return new GoogleGenerativeAI(key).getGenerativeModel({
-    model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
-    generationConfig: { temperature: 0.2, ...(json ? { responseMimeType: "application/json" } : {}) },
-  });
+  return new GoogleGenerativeAI(key);
 }
 
 const MAX_CHARS = 120_000;
 export const clip = (s: string) => (s.length > MAX_CHARS ? s.slice(0, MAX_CHARS) : s);
 
+const retryable = (e: unknown) => /(503|429|404|500)/.test(String((e as Error)?.message));
+
+/** Calls Gemini, falling back to the next model when one is overloaded, retired or rate limited. */
+async function call(json: boolean, input: string | Parameters<ReturnType<GoogleGenerativeAI["getGenerativeModel"]>["generateContent"]>[0]) {
+  const c = client();
+  let last: unknown;
+  for (const name of MODELS()) {
+    for (let i = 0; i < 2; i++) {
+      try {
+        const m = c.getGenerativeModel({ model: name, generationConfig: { temperature: 0.2, ...(json ? { responseMimeType: "application/json" } : {}) } }, { timeout: 60_000 });
+        return await m.generateContent(input as never);
+      } catch (e) {
+        last = e;
+        console.error(`gemini ${name} failed:`, String((e as Error).message).slice(0, 200));
+        if (!retryable(e)) throw e;
+        await new Promise((r) => setTimeout(r, 800));
+      }
+    }
+  }
+  throw last;
+}
+
 /** Ask the model for JSON and validate it with zod. Retries once with the validation error. */
 export async function generateJson<T extends z.ZodTypeAny>(system: string, user: string, schema: T): Promise<{ data: z.infer<T>; tokens: number }> {
-  const m = model(true);
-  let prompt = `${system}\n\nReturn ONLY valid JSON.\n\n${user}`;
+  let prompt = `${system}
+
+Return ONLY valid JSON.
+
+${user}`;
   let tokens = 0;
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
-      const r = await m.generateContent(prompt);
+      const r = await call(true, prompt);
       tokens += r.response.usageMetadata?.totalTokenCount ?? 0;
-      const raw = r.response.text().replace(/^```json\s*|```$/g, "").trim();
+      const raw = r.response.text().replace(/^```jsons*|```$/g, "").trim();
       const parsed = schema.safeParse(JSON.parse(raw));
       if (parsed.success) return { data: parsed.data, tokens };
-      prompt += `\n\nYour previous output failed validation: ${parsed.error.message.slice(0, 600)}. Fix it and return only JSON.`;
+      prompt += `
+
+Your previous output failed validation: ${parsed.error.message.slice(0, 600)}. Fix it and return only JSON.`;
     } catch (e) {
       if (e instanceof AiError) throw e;
-      if (attempt === 1) throw new AiError("The AI provider returned an unusable response. Please try again.");
+      console.error("generateJson attempt failed:", (e as Error).message?.slice(0, 200));
+      if (attempt === 1) throw new AiError(retryable(e) ? "The AI service is busy right now. Please try again in a moment." : "The AI provider returned an unusable response. Please try again.");
     }
   }
   throw new AiError("The AI response could not be validated. Please try again.");
@@ -40,18 +67,20 @@ export async function generateJson<T extends z.ZodTypeAny>(system: string, user:
 
 export async function generateText(system: string, user: string): Promise<{ text: string; tokens: number }> {
   try {
-    const r = await model(false).generateContent(`${system}\n\n${user}`);
+    const r = await call(false, `${system}
+
+${user}`);
     return { text: r.response.text().trim(), tokens: r.response.usageMetadata?.totalTokenCount ?? 0 };
   } catch (e) {
     if (e instanceof AiError) throw e;
-    throw new AiError("The AI provider failed. Please try again.");
+    throw new AiError(retryable(e) ? "The AI service is busy right now. Please try again in a moment." : "The AI provider failed. Please try again.");
   }
 }
 
 /** Extract text from a PDF using Gemini's native document understanding. */
 export async function pdfToText(bytes: Buffer): Promise<string> {
   try {
-    const r = await model(false).generateContent([
+    const r = await call(false, [
       { inlineData: { data: bytes.toString("base64"), mimeType: "application/pdf" } },
       "Transcribe this document to plain text exactly as written. Keep headings and clause numbering. Output only the text.",
     ]);
